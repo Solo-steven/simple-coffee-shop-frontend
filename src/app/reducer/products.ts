@@ -5,7 +5,7 @@ export interface ProductState extends Array<{
     category: string,
     imgUrl: string,
     price: Array<number>,
-    specification: Array<number>,
+    specification: Array<string>,
     payway: Array<string>,
     deliverWay: Array<string>,
     description: string 
