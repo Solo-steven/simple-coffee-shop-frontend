@@ -2,7 +2,8 @@ import React from "react";
 import { Global, css } from "@emotion/react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { AppRoot, AppNavbarSpacer, AppBody } from "./style";
-import Navbar from "./common/Navbar";
+import Navbar from "./components/Navbar";
+import Modal from "./components/Modal";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 
@@ -32,6 +33,7 @@ const App: React.FC = () => {
                         <Product />
                     </Route>
                 </Switch>
+                <Modal/>
             </AppBody>
         </AppRoot>
     );

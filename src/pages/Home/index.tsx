@@ -18,7 +18,7 @@ const Home: React.FC = () => {
     const products = useSelector((state: RootState) => state.products);
     const dispatch = useDispatch();
     useEffect(() => {
-        if(products.length === 0) dispatch(ActionsCreateor.request.fetchProducts());
+        if(products.length === 0) dispatch(ActionsCreateor.request.fetchProducts(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     

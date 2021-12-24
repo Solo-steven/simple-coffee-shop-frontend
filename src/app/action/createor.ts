@@ -15,11 +15,39 @@ export const start = {
         }
     }
 };
+export const cart = {
+    addToCart(name: string,  number: number, specification: string) {
+        return {
+            type: Type.cart.addToCart,
+            payload: {
+                name, number, specification
+            }
+        }
+    },
+    changeCartItemNumber(name: string, number: number) {
+        return {
+            type: Type.cart.changeCartItemNumber,
+            payload: {
+                name, number
+            }
+        }
+    },
+};
+export const modal = {
+    taggleModal(active: boolean, type: "error" | "success" | "" = "", title: string = "", body: string ="") {
+        return {
+            type: Type.modal.taggleModal,
+            payload: {
+                active, type, title, body
+            }
+        }
+    }
+}
 
 export const request = {
-    fetchProducts() {
+    fetchProducts(category: string ) {
         return async (getState: () => RootState, dispatch: Function) => {
-            const data = await API.GetAllProducts();
+            const data = await API.GetAllProducts(category);
             dispatch(start.finishFetchData(data));
         }
     }

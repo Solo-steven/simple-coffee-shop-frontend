@@ -17,7 +17,8 @@ export function ProductReducer(state: ProductState = [], action: any) {
         case Type.product.startFetchData:
             break;
         case Type.product.finishFetchData:
-            newState = action.payload;
+            if(Array.isArray(action.payload))
+                newState = [...action.payload];
             break;
         default:
             break;

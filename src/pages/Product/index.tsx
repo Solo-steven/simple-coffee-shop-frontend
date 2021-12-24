@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/reducer";
 import * as ActionsCreateor from "../../app/action/createor"; 
@@ -18,17 +18,27 @@ import {
     ProductTextContent, 
     ProductTextTitle 
 } from "./style";
-import { product } from "../../app/action/type";
 
 export const Product: React.FC = () => {
-    const { name } = useParams<{name: string; category: string}>();
+    /**  Temporary Form State Hooks.
+     *   -> product number, product specification.
+     */
+    const [number, setNumber] = useState(0);
+    const handleProductNumberChange = useCallback((newVal: number) => {
+        if(newVal >= 0 ) setNumber(newVal);
+    }, [setNumber]);
+    const [specification, setSpecification] = useState("");
+    /** Redux and React router hook for showing product data.
+     * 
+     */
+    const { name, category } = useParams<{name: string; category: string}>();
     const dispatch = useDispatch();
     const product = useSelector((state: RootState) => {
             return state.products.filter(product => product.name === name)[0];
     });
     useEffect(() => {
         if(!product){
-            dispatch(ActionsCreateor.request.fetchProducts());
+            dispatch(ActionsCreateor.request.fetchProducts(category));
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -55,18 +65,41 @@ export const Product: React.FC = () => {
                             return <ProductPrice>{`$ ${minPrice} ~ ${maxPrice}`}</ProductPrice>
                         })()}
                         <ProductSpecification>
-                            <Select>
+                            <Select value={specification} onChange={(e)=> { setSpecification(e.target.value) }}>
+                                <option value="" key="">{""}</option>
                                 {product.specification.map((specification, index) => {
-                                    return <option value={specification}>{`${specification} (${product.price[index]})`}</option>
+                                    return <option value={specification} key={specification}>{`${specification} (${product.price[index]})`}</option>
                                 })}
                             </Select>
                         </ProductSpecification>
                         <ProductNumber>
-                            <InputButton value={1} onChange={(index) => {}}/>
+                            <InputButton 
+                                value={number} 
+                                onChange={handleProductNumberChange}
+                            />
                         </ProductNumber>
                         <ProductButtonGroup>
                             <PrimaryButton>{"直接購買"}</PrimaryButton>
-                            <SecondaryButton>{"加入購物車"}</SecondaryButton>
+                            <SecondaryButton 
+                                onClick={ ()=>{ 
+                                    console.log(number, specification);
+                                    if(number !== 0 && specification !== ""){
+                                        dispatch(ActionsCreateor.cart.addToCart(product.name, number, specification));
+                                        dispatch(ActionsCreateor.modal.taggleModal(
+                                            true, 
+                                            "success", 
+                                            "成功加入購物車", 
+                                            `訂購${product.name}的${specification}共${number}件`
+                                        ))
+                                        setSpecification("");
+                                        setNumber(0);
+                                        return;
+                                    }
+                                    dispatch(ActionsCreateor.modal.taggleModal(true, "error", "錯誤", "數量和規格不可以為空的"))
+                                }}
+                            >
+                                {"加入購物車"}
+                            </SecondaryButton>
                         </ProductButtonGroup>
                         <ProductTextTitle>
                             {"運送方法"}
