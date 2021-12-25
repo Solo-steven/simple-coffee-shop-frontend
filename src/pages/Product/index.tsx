@@ -33,9 +33,10 @@ export const Product: React.FC = () => {
      */
     const { name, category } = useParams<{name: string; category: string}>();
     const dispatch = useDispatch();
-    const product = useSelector((state: RootState) => {
-            return state.products.filter(product => product.name === name)[0];
+    const product = useSelector((root: RootState) => {
+            return root.products.filter(product => product.name === name)[0];
     });
+    const carts = useSelector((root: RootState) => root.carts.items)
     useEffect(() => {
         if(!product){
             dispatch(ActionsCreateor.request.fetchProducts(category));
@@ -82,7 +83,16 @@ export const Product: React.FC = () => {
                             <PrimaryButton>{"直接購買"}</PrimaryButton>
                             <SecondaryButton 
                                 onClick={ ()=>{ 
-                                    if(number !== 0 && specification !== ""){
+                                    if(number !== 0 && specification !== "") {
+                                        if(carts.filter(item => item.name === product.name && item.specification === specification).length > 0) {
+                                            dispatch(ActionsCreateor.modal.taggleModal(
+                                                true, 
+                                                "error", 
+                                                "購物車已存在商品", 
+                                                `${specification}的${product.name}已經在購物車了`
+                                            ))   
+                                            return;                                         
+                                        }
                                         dispatch(ActionsCreateor.cart.addToCart(product.name, number, specification));
                                         dispatch(ActionsCreateor.modal.taggleModal(
                                             true, 

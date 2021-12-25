@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
+import "./asset/animation.css";
 
 const App: React.FC = () => {
     return (

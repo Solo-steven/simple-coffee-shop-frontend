@@ -1,5 +1,4 @@
 import styled from "@emotion/styled/macro";
-import { animated } from "react-spring";
 
 export const DrawerRoot =  styled.div`
     width: 100vw;
@@ -11,12 +10,13 @@ export const DrawerRoot =  styled.div`
     justify-content: flex-end;
     align-items: center;
 `;
-export const DrawerDialog = styled(animated.div)`
+export const DrawerDialog = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     background-color: #F0F0F0;
     height: 100vh;
+    max-width: 400px;
 `;
 export const DrawerHeader = styled.div`
     background-color: #292929;
@@ -48,6 +48,7 @@ export const DrawerItemNameAndSpecification = styled.div`
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    padding: 0px 15px;
 `;
 export const DrawerItemName = styled.p`
     display: flex;
@@ -70,5 +71,12 @@ export const DrawerItemFooter = styled.div`
     align-items: center;
 `;
 export const DrawerFooter = styled.div`
-    padding: 12px 30%;
+    border-top: 1px solid #292929a2;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+export const DrawerFooterTotle = styled.div`
+
 `;

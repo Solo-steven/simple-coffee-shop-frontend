@@ -1,0 +1,46 @@
+.drawer-enter {
+  opacity: 0;
+  transform: translateX(200%);
+}
+.drawer-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.2s;
+}
+.drawer-enter-done {
+  transform: translateX(0);
+}
+.drawer-exit {
+  transform: translateX(200%);
+  transition: transform 0.2s;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.scale-enter {
+  transform: scale(1.2);
+}
+.sclae-enter-active {
+  transform: scale(1);
+  transition: scale 1s;
+}
+.scale-exit {
+  transform: scale(1);
+}
+.scale-exit-active {
+  transform: scale(1);
+  transition: scale 1s;
+}
