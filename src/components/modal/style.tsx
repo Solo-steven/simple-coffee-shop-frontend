@@ -5,7 +5,7 @@ export const ModalRoot =  styled.div`
     height: 100vh;
     position: fixed;
     top: 0;
-    background: #29292971;
+    background: #2929299d;
     display: flex;
     justify-content: center;
     align-items: center;

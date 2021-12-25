@@ -15,12 +15,11 @@ const Home: React.FC = () => {
     const { category } = useParams<{category: string}>();
 
     // Redux Hook
-    const products = useSelector((state: RootState) => state.products);
+    const products = useSelector((state: RootState) => state.products.filter((product) => product.category === category));
     const dispatch = useDispatch();
     useEffect(() => {
         if(products.length === 0) dispatch(ActionsCreateor.request.fetchProducts(category));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
+    },[products, category, dispatch]);
     
     return ( 
         <HomeRoot>

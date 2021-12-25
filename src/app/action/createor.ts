@@ -16,6 +16,11 @@ export const start = {
     }
 };
 export const cart = {
+    taggleCartDrawer() {
+        return {
+            type: Type.cart.taggleCartDrawer
+        }
+    },
     addToCart(name: string,  number: number, specification: string) {
         return {
             type: Type.cart.addToCart,
@@ -24,11 +29,11 @@ export const cart = {
             }
         }
     },
-    changeCartItemNumber(name: string, number: number) {
+    changeCartItemNumber(name: string, specification: string, number: number) {
         return {
             type: Type.cart.changeCartItemNumber,
             payload: {
-                name, number
+                name, number, specification
             }
         }
     },

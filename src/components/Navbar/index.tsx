@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import * as ActionsCreateor from "../../app/action/createor";
 import { MdManageSearch, MdShoppingCart } from "react-icons/md"
 import {
  NavbarRoot, NavbarSpacer, 
@@ -9,6 +11,7 @@ import Icon from "./icon";
 
 
 const Navbar: React.FC = () => {
+    const dispatch = useDispatch();
     return (
         <NavbarRoot>
             <NavbarTextContainer>
@@ -19,7 +22,7 @@ const Navbar: React.FC = () => {
             <Icon/>
             <NavbarSpacer/>
             <NavbarButtonContainer>
-                <NavbarButton>
+                <NavbarButton onClick={ ()=> { dispatch(ActionsCreateor.cart.taggleCartDrawer()) } }>
                     <MdShoppingCart/>
                 </NavbarButton>
                  <NavbarButton>

@@ -82,7 +82,6 @@ export const Product: React.FC = () => {
                             <PrimaryButton>{"直接購買"}</PrimaryButton>
                             <SecondaryButton 
                                 onClick={ ()=>{ 
-                                    console.log(number, specification);
                                     if(number !== 0 && specification !== ""){
                                         dispatch(ActionsCreateor.cart.addToCart(product.name, number, specification));
                                         dispatch(ActionsCreateor.modal.taggleModal(

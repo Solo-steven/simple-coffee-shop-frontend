@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { AppRoot, AppNavbarSpacer, AppBody } from "./style";
 import Navbar from "./components/Navbar";
 import Modal from "./components/Modal";
+import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
                     </Route>
                 </Switch>
                 <Modal/>
+                <Drawer />
             </AppBody>
         </AppRoot>
     );
