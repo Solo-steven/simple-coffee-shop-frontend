@@ -1,6 +1,7 @@
 import React from"react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/reducer";
+import * as ActionsCreateor from "../../app/action/createor";
 import { Container, Item } from "../../common/Grid";
 import Input from "../../common/Input";
 import Select from "../../common/Select";
@@ -30,8 +31,10 @@ import {
 } from "./style";
 
 export const Order: React.FC = () => {
+    const dispatch = useDispatch();
     const carts = useSelector((root: RootState) => root.carts.items);
     const products = useSelector((root: RootState) => root.products);
+    const order = useSelector((root: RootState) => root.order);
     return (
         <OrderRoot>
             <OrderCartRoot>
@@ -82,12 +85,12 @@ export const Order: React.FC = () => {
                 <OrderInfoBody>
                     <OrderInfoInputBlock>
                         <Select>
-                            <option value="">收件方式</option>
+                            <option value="">{"收件方式"}</option>
                         </Select>
                     </OrderInfoInputBlock>
                     <OrderInfoInputBlock>
                         <Select>
-                            <option value="">付款方式</option>
+                            <option value="">{"付款方式"}</option>
                         </Select>
                     </OrderInfoInputBlock>
                 </OrderInfoBody>
@@ -97,13 +100,32 @@ export const Order: React.FC = () => {
                     <OrderFormBlockHeader>{"購買人資訊"}</OrderFormBlockHeader>
                     <OrderFormBlockBody>
                         <OrderFormBlockInput>
-                            <Input placeholder="稱呼"/>
+                            <Input 
+                                placeholder="稱呼" 
+                                value={order.buyer.name} 
+                                onChange={(e) => {
+                                    dispatch( ActionsCreateor.order.changeBuyerName(e.target.value));
+                                }}
+                            />
                         </OrderFormBlockInput> 
                         <OrderFormBlockInput>
-                            <Input placeholder="聯絡電話"/>
+                            <Input 
+                                placeholder="聯絡電話" 
+                                value={order.buyer.phone}
+                                onChange={(e) => {
+                                    dispatch( ActionsCreateor.order.changeBuyerPhone(e.target.value));
+                                }}
+                            />
                         </OrderFormBlockInput> 
                         <OrderFormBlockInput>
-                            <Input placeholder="電子信箱"/>
+                            <Input 
+                                placeholder="電子信箱" 
+                                type="email"
+                                value={order.buyer.email}
+                                onChange={(e) => {
+                                    dispatch(ActionsCreateor.order.changeBuyerEmail(e.target.value));
+                                }}
+                            />
                         </OrderFormBlockInput> 
                     </OrderFormBlockBody>
                 </OrderFormBlock>
@@ -111,13 +133,32 @@ export const Order: React.FC = () => {
                     <OrderFormBlockHeader>{"收件人資訊"}</OrderFormBlockHeader>
                     <OrderFormBlockBody>
                         <OrderFormBlockInput>
-                            <Input placeholder="稱呼"/>
+                            <Input 
+                                placeholder="稱呼" 
+                                value={order.reciver.name}
+                                onChange={(e) => {
+                                    dispatch(ActionsCreateor.order.changeReciverName(e.target.value));
+                                } }
+                            />
                         </OrderFormBlockInput> 
                         <OrderFormBlockInput>
-                            <Input placeholder="聯絡電話"/>
+                            <Input 
+                                placeholder="聯絡電話" 
+                                value={order.reciver.phone} 
+                                onChange={(e) => {
+                                    dispatch(ActionsCreateor.order.changeReciverPhone(e.target.value))
+                                }}
+                            />
                         </OrderFormBlockInput> 
                         <OrderFormBlockInput>
-                            <Input placeholder="電子信箱"/>
+                            <Input 
+                                placeholder="電子信箱" 
+                                type="email"
+                                value={order.reciver.email}
+                                onChange={(e) => {
+                                    dispatch(ActionsCreateor.order.changeReciverEmail(e.target.value))
+                                }}
+                            />
                         </OrderFormBlockInput> 
                     </OrderFormBlockBody>
                 </OrderFormBlock>

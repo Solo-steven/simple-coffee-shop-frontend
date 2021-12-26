@@ -48,6 +48,46 @@ export const modal = {
         }
     }
 }
+export const order = {
+    changeBuyerName(name: string) {
+        return {
+            type: Type.order.changeBuyerName,
+            payload: name
+        };
+    },
+    changeBuyerPhone(phone: string) {
+        return {
+            type: Type.order.changeBuyerPhone,
+            payload: phone
+        };
+    },
+    changeBuyerEmail(email: string) {
+        return {
+            type: Type.order.changeBuyerEmail,
+            payload: email
+        }
+    },
+    changeReciverName(name: string) {
+        return {
+            type: Type.order.changeReciverName,
+            payload: name
+        };
+    },
+    changeReciverPhone(phone: string) {
+        return {
+            type: Type.order.changeReciverPhone,
+            payload: phone
+        };
+    },
+    changeReciverEmail(email: string) {
+        return {
+            type: Type.order.changeReciverEmail,
+            payload: email
+        }
+    },
+
+}
+
 
 export const request = {
     fetchProducts(category: string ) {

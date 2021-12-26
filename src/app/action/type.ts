@@ -10,3 +10,13 @@ export const cart = {
 export const modal = {
     taggleModal: "Modal/Taggle_Modal"
 };
+export const order = {
+    
+    changeReciverName: "Order/Change_Reciver_Name",
+    changeReciverPhone: "Order/Change_Reciver_Phone",
+    changeReciverEmail: "Order/Change_Reciver_Email",
+    
+    changeBuyerName: "Order/Change_Buyer_Name",
+    changeBuyerPhone: "Order/Change_Buyer_Phone",
+    changeBuyerEmail: "Order/Change_Buyer_Email",
+}
