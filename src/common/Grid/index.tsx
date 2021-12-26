@@ -3,10 +3,12 @@ import styled from "@emotion/styled/macro";
 
 export interface ItemProps {
     size?: string | number;
+    flex? : boolean;
 }
 
 export const Item = styled.div`
     width: ${(props: ItemProps) => (!props.size ? "auto" : `${100 * (Number(props.size) / 12)}%`)};
+    display: ${(props: ItemProps) => !props.flex ? "block" : "flex"}
 `;
 
 

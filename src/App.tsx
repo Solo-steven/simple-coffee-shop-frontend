@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
+import Order from "./pages/Order";
 import "./asset/animation.css";
 
 const App: React.FC = () => {
@@ -33,6 +34,9 @@ const App: React.FC = () => {
                     </Route>
                     <Route exact path="/home/:category/:name">
                         <Product />
+                    </Route>
+                    <Route exact path="/order">
+                        <Order/>
                     </Route>
                 </Switch>
                 <Modal/>

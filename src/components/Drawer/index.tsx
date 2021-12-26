@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector} from "react-redux";
+import { useHistory } from "react-router-dom";
 import { RootState } from "../../app/reducer";
 import * as ActionCreators from "../../app/action/createor";
-import { useSpring } from "react-spring";
 import { CSSTransition } from "react-transition-group";
 import { InputButton, PrimaryButton } from "../../common/Button";
 import { 
@@ -21,6 +21,7 @@ import {
 } from "./style";
 
 const Drawer: React.FC = () => {
+    const { push, location } = useHistory();
     const dispatch = useDispatch();
     const carts = useSelector((root: RootState) => root.carts);
     const products = useSelector((root: RootState) => root.products);
@@ -56,7 +57,16 @@ const Drawer: React.FC = () => {
                             )})}
                         </DrawerBody>
                         <DrawerFooter>
-                            <PrimaryButton>{"前往結帳"}</PrimaryButton>
+                            <PrimaryButton 
+                                onClick={() => { 
+                                    if(location.pathname !== "order") {
+                                        push("/order") 
+                                        dispatch(ActionCreators.cart.taggleCartDrawer())
+                                    }
+                                }}
+                            >
+                                {"前往結帳"}
+                            </PrimaryButton>
                         </DrawerFooter>
                     </DrawerDialog>
                 </CSSTransition>
