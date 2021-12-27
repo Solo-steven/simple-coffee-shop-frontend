@@ -11,7 +11,11 @@ export const modal = {
     taggleModal: "Modal/Taggle_Modal"
 };
 export const order = {
-    
+    taggleFinishFlag: "Order/Taggle_Finish_Flag",
+
+    changePayWay:"Order/Change_Pay_Way",
+    changeDeliveryWay:"Order/Change_Delivery_Way",
+
     changeReciverName: "Order/Change_Reciver_Name",
     changeReciverPhone: "Order/Change_Reciver_Phone",
     changeReciverEmail: "Order/Change_Reciver_Email",

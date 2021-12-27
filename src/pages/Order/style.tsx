@@ -102,3 +102,9 @@ export const OrderFormBlockBody = styled.div`
 export const OrderFormBlockInput = styled.div`
     padding: 16px;
 `;
+export const OrderCheckoutButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+`;

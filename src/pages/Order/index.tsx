@@ -1,8 +1,10 @@
 import React from"react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { RootState } from "../../app/reducer";
 import * as ActionsCreateor from "../../app/action/createor";
 import { Container, Item } from "../../common/Grid";
+import { PrimaryButton } from "../../common/Button";
 import Input from "../../common/Input";
 import Select from "../../common/Select";
 import { 
@@ -28,6 +30,8 @@ import {
     OrderFormBlockHeader,
     OrderFormBlockBody,
     OrderFormBlockInput,
+    // Style for Check Button
+    OrderCheckoutButton
 } from "./style";
 
 export const Order: React.FC = () => {
@@ -35,6 +39,13 @@ export const Order: React.FC = () => {
     const carts = useSelector((root: RootState) => root.carts.items);
     const products = useSelector((root: RootState) => root.products);
     const order = useSelector((root: RootState) => root.order);
+    
+    if(order.finishFlag === true) {
+        return <Redirect to={ {
+            pathname: `/search/${order.finishId}`,
+            state: { from: "order" }
+        }}  />
+    }
     return (
         <OrderRoot>
             <OrderCartRoot>
@@ -84,13 +95,39 @@ export const Order: React.FC = () => {
                 <OrderInfoHeader>{"訂購資訊"}</OrderInfoHeader>
                 <OrderInfoBody>
                     <OrderInfoInputBlock>
-                        <Select>
+                        <Select onChange={(e) => { dispatch(ActionsCreateor.order.changeDeliveryWay(e.target.value)) }}>
                             <option value="">{"收件方式"}</option>
+                            {
+                                carts.reduce((array, item) => {
+                                    const product = products.filter(product => product.name === item.name)[0];
+                                    for(const arrayItem of array) {
+                                        if(product.deliverWay.indexOf(arrayItem) === -1) {
+                                            console.log(array);
+                                            const index = array.indexOf(arrayItem);
+                                            return [...array.slice(0, index), ...array.slice(index + 1, array.length)]
+                                        }
+                                    }
+                                    return array;
+                                }, ["門市取貨","超商取貨","宅配付款"]).map(item=> (<option key={item} value={item}>{item}</option>))
+                            }
                         </Select>
                     </OrderInfoInputBlock>
                     <OrderInfoInputBlock>
-                        <Select>
-                            <option value="">{"付款方式"}</option>
+                        <Select onChange={(e) => { dispatch(ActionsCreateor.order.changePayWay(e.target.value)) }}>
+                            <option key="" value="">{"付款方式"}</option>
+                            {
+                                carts.reduce((array, item) => {
+                                    const product = products.filter(product => product.name === item.name)[0];
+                                    for(const arrayItem of array) {
+                                        if(product.payway.indexOf(arrayItem) === -1) {
+                                            console.log(array);
+                                            const index = array.indexOf(arrayItem);
+                                            return [...array.slice(0, index), ...array.slice(index + 1, array.length)]
+                                        }
+                                    }
+                                    return array;
+                                }, ["超商付款","轉帳付款","貨到付款"]).map(item=> (<option key={item} value={item}>{item}</option>))
+                            }
                         </Select>
                     </OrderInfoInputBlock>
                 </OrderInfoBody>
@@ -163,6 +200,9 @@ export const Order: React.FC = () => {
                     </OrderFormBlockBody>
                 </OrderFormBlock>
             </OrderFormRoot>
+            <OrderCheckoutButton>
+                <PrimaryButton onClick={()=> { dispatch(ActionsCreateor.request.createOrder()) }} >{"下訂單"}</PrimaryButton>
+            </OrderCheckoutButton>
         </OrderRoot>
     )
 };

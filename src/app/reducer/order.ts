@@ -1,6 +1,10 @@
 import * as Type from "../action/type";
 
 export interface OrderState {
+    // finish api flag and data.
+    finishFlag: boolean;
+    finishId: string;
+    // from data.
     deliverWay: string;
     payWay: string;
     buyer : {
@@ -15,6 +19,8 @@ export interface OrderState {
     }
 }
 const initialState: OrderState = {
+    finishFlag: false,
+    finishId: "",
     deliverWay: "",
     payWay: "",
     buyer: { name: "", phone: "", email: ""},
@@ -24,6 +30,16 @@ const initialState: OrderState = {
 export function OrderReducer(state: OrderState = initialState, action: any) {
     let newState = Object.assign({},state);
     switch (action.type) {
+        case Type.order.taggleFinishFlag:
+            newState.finishFlag = !newState.finishFlag;
+            newState.finishId = action.payload;
+            break;
+        case Type.order.changePayWay:
+            newState.payWay = action.payload;
+            break;
+        case Type.order.changeDeliveryWay:
+            newState.deliverWay = action.payload;
+            break;
         // buyer form
         case Type.order.changeBuyerName:
             newState.buyer = {...newState.buyer, name: action.payload};

@@ -49,6 +49,24 @@ export const modal = {
     }
 }
 export const order = {
+    taggleFinishFlag(id: string = "") {
+        return {
+            type: Type.order.taggleFinishFlag,
+            payload: id,
+        }
+    },
+    changePayWay(way: string) {
+        return {
+            type: Type.order.changePayWay,
+            payload: way,
+        };
+    },
+    changeDeliveryWay(way: string) {
+        return {
+            type: Type.order.changeDeliveryWay,
+            payload: way,
+        } 
+    },
     changeBuyerName(name: string) {
         return {
             type: Type.order.changeBuyerName,
@@ -88,12 +106,28 @@ export const order = {
 
 }
 
-
 export const request = {
     fetchProducts(category: string ) {
         return async (getState: () => RootState, dispatch: Function) => {
             const data = await API.GetAllProducts(category);
             dispatch(start.finishFetchData(data));
+        }
+    },
+    createOrder() {
+        return async (getState: () => RootState, dispatch: Function) => {
+            const { payWay, deliverWay, buyer, reciver } = getState().order;
+            const carts = getState().carts;
+            const products = getState().products;
+            const list = carts.items.map(item =>{ 
+                const product = products.filter(product=>product.name === item.name)[0];
+                const total =  item.number * product.price[ product.specification.indexOf(item.specification)];
+                return { ...item , total };
+            })
+            const { id }=  await API.PostNewOrder(
+                payWay, deliverWay, list, buyer, reciver,
+            );
+            console.log(id);
+            dispatch(order.taggleFinishFlag(id));
         }
     }
 };

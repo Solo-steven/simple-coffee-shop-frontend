@@ -38,6 +38,13 @@ const App: React.FC = () => {
                     <Route exact path="/order">
                         <Order/>
                     </Route>
+                    <Route exact path="/search/:id"
+                        render={(props) => {
+                            const location = props.location;
+                            console.log(location)
+                            return <div>In develop</div>
+                        }}
+                    />
                 </Switch>
                 <Modal/>
                 <Drawer />
