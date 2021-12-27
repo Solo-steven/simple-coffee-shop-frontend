@@ -4,6 +4,7 @@ export const product = {
 };
 export const cart = {
     taggleCartDrawer: "Cart/Taggle_Cart_Drawer",
+    clearCartItems: "Product/Clear_Cart_Items",
     addToCart: "Cart/Add_To_Cart",
     changeCartItemNumber: "Cart/Change_Cart_Item_Number",
 };
@@ -12,6 +13,7 @@ export const modal = {
 };
 export const order = {
     taggleFinishFlag: "Order/Taggle_Finish_Flag",
+    clearOrderForm: "Order/Clear_Order_Form",
 
     changePayWay:"Order/Change_Pay_Way",
     changeDeliveryWay:"Order/Change_Delivery_Way",
@@ -23,4 +25,7 @@ export const order = {
     changeBuyerName: "Order/Change_Buyer_Name",
     changeBuyerPhone: "Order/Change_Buyer_Phone",
     changeBuyerEmail: "Order/Change_Buyer_Email",
+};
+export const search = {
+    finishFetchOrder: "Search/Finish_Fetch_Order"
 }

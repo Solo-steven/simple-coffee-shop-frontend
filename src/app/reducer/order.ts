@@ -34,6 +34,11 @@ export function OrderReducer(state: OrderState = initialState, action: any) {
             newState.finishFlag = !newState.finishFlag;
             newState.finishId = action.payload;
             break;
+        case Type.order.clearOrderForm:
+            newState = {...initialState};
+            newState.buyer = { ...initialState.buyer };
+            newState.reciver = { ...initialState.reciver};
+            break;
         case Type.order.changePayWay:
             newState.payWay = action.payload;
             break;

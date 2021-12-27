@@ -25,3 +25,8 @@ export const PostNewOrder = async (
     } }).then((response) => {return response.data})
     .catch(error => { console.log(error) })
 }
+export const GetOrderById = async (id: string) => {
+    return await customHeader.get("/orders", { params:{ id} })
+        .then((response)=> {return response.data})
+        .catch(error => {console.log(error)})
+}

@@ -8,6 +8,7 @@ import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Order from "./pages/Order";
+import Search from "./pages/Search";
 import "./asset/animation.css";
 
 const App: React.FC = () => {
@@ -38,13 +39,9 @@ const App: React.FC = () => {
                     <Route exact path="/order">
                         <Order/>
                     </Route>
-                    <Route exact path="/search/:id"
-                        render={(props) => {
-                            const location = props.location;
-                            console.log(location)
-                            return <div>In develop</div>
-                        }}
-                    />
+                    <Route exact path="/search/:id">
+                        <Search/>
+                    </Route>
                 </Switch>
                 <Modal/>
                 <Drawer />

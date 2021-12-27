@@ -2,7 +2,7 @@ import * as Type from "./type";
 import * as API from "../../api";
 import { RootState } from "../reducer/index";
 
-export const start = {
+export const product = {
     startFetchData() {
         return {
             type: Type.product.startFetchData
@@ -19,6 +19,11 @@ export const cart = {
     taggleCartDrawer() {
         return {
             type: Type.cart.taggleCartDrawer
+        }
+    },
+    clearCartItems() {
+        return {
+            type: Type.cart.clearCartItems
         }
     },
     addToCart(name: string,  number: number, specification: string) {
@@ -53,6 +58,11 @@ export const order = {
         return {
             type: Type.order.taggleFinishFlag,
             payload: id,
+        }
+    },
+    clearOrderForm() {
+        return {
+            type: Type.order.clearOrderForm,
         }
     },
     changePayWay(way: string) {
@@ -105,12 +115,19 @@ export const order = {
     },
 
 }
+export const search = {
+    finishFetchOrder: (order: any) => ({
+        type: Type.search.finishFetchOrder,
+        payload: order,
+    })
+}
+
 
 export const request = {
     fetchProducts(category: string ) {
         return async (getState: () => RootState, dispatch: Function) => {
             const data = await API.GetAllProducts(category);
-            dispatch(start.finishFetchData(data));
+            dispatch(product.finishFetchData(data));
         }
     },
     createOrder() {
@@ -129,5 +146,12 @@ export const request = {
             console.log(id);
             dispatch(order.taggleFinishFlag(id));
         }
-    }
+    },
+    fetchOrder(id: string) {
+        return async (getState: () => RootState, dispatch: Function) => {
+            const order = await API.GetOrderById(id);
+            console.log(order);
+            dispatch(search.finishFetchOrder(order));
+        }
+    } 
 };

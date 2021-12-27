@@ -17,10 +17,13 @@ export function CartReducer(state: CartState = initialState, action: any) {
     let newState: CartState = Object.assign({},state);
     switch (action.type) {
         /** Toggle Cart Drawer
-         *  taggle active boolean
+         *   -> taggle active boolean
          */
         case Type.cart.taggleCartDrawer:
             newState.active = !state.active
+            break;
+        case Type.cart.clearCartItems:
+            newState.items = [];
             break;
         /** Add Item to Cart Array
          *  -> name, number, specification id not null.
