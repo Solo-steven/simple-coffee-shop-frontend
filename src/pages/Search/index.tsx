@@ -35,8 +35,7 @@ export const Order: React.FC = () => {
     const location = useLocation<{from: string}>();
     const { id } = useParams<{id: string}>();
 
-    const products = useSelector((root: RootState) => root.products);
-    const orders = useSelector((root: RootState) => root.search.filter(item => item._id ===id));
+    const orders = useSelector((root: RootState) => root.search.filter(item => item.id ===id));
 
     useEffect(() => {
         if(location.state) {
@@ -48,10 +47,11 @@ export const Order: React.FC = () => {
     },[dispatch, location]);
 
     useEffect(() => {
-        dispatch(ActionsCreateor.request.fetchOrder(id))
-    }, [dispatch, id]);
+        if(orders.length === 0)
+         dispatch(ActionsCreateor.request.fetchOrder(id))
+    }, [dispatch, orders, id]);
 
-    if(orders.length === 0 || products.length === 0) {
+    if(orders.length === 0) {
         return <div>Loading</div>
     }
     return (
@@ -68,18 +68,16 @@ export const Order: React.FC = () => {
                 <OrderCartBody>
                     { 
                         orders[0].list.map(item => {
-                            const product = products.filter(product => product.name === item.name)[0];
-                            const price = product.price[ product.specification.indexOf(item.specification) ];
                             return (
                                 <OrderCartItem>
                                     <Container>
                                         <Item size={7.5} flex>
-                                            <OrderCartItemImg src={product.imgUrl}/>
+                                            <OrderCartItemImg src={item.imgUrl}/>
                                             <OrderCartItemName>{item.name}</OrderCartItemName>
                                         </Item>
                                         <Item size={1.5}>{item.number}</Item>
-                                        <Item size={1.5}>{price}</Item>
-                                        <Item size={1.5}>{item.number * price}</Item>
+                                        <Item size={1.5}>{item.price}</Item>
+                                        <Item size={1.5}>{item.number * item.price}</Item>
                                     </Container>
                                 </OrderCartItem>
                             )
@@ -91,9 +89,7 @@ export const Order: React.FC = () => {
                     <OrderCartTotalNumber>
                         { 
                             orders[0].list.reduce((sum, item) => {
-                                const product = products.filter(product => product.name === item.name)[0];
-                                const price = product.price[ product.specification.indexOf(item.specification) ];
-                                return sum + price * item.number;            
+                                return sum + item.price * item.number;            
                             }, 0)
                         }
                     </OrderCartTotalNumber>

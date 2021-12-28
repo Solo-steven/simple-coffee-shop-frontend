@@ -1,7 +1,7 @@
 import * as Type from "../action/type";
 
 export interface SearchState extends Array<{
-    _id: string
+    id: string
     deliverWay: string;
     payWay: string;
     buyer : {
@@ -18,7 +18,8 @@ export interface SearchState extends Array<{
         name: string,
         number: number,
         specification: string,
-        total: number
+        imgUrl: string,
+        price: number
     }>
 }>{}
 

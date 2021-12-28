@@ -3,126 +3,83 @@ import * as API from "../../api";
 import { RootState } from "../reducer/index";
 
 export const product = {
-    startFetchData() {
-        return {
-            type: Type.product.startFetchData
-        };
-    },
-    finishFetchData(data: Array<{}>) {
-        return {
-            type: Type.product.finishFetchData,
-            payload: data
-        }
-    }
+    startFetchData: ()=> ({
+        type: Type.product.startFetchData
+    }),
+    finishFetchData: (data: Array<any>) => ({
+        type: Type.product.finishFetchData,
+        payload: data
+    })
 };
-export const cart = {
-    taggleCartDrawer() {
-        return {
-            type: Type.cart.taggleCartDrawer
-        }
-    },
-    clearCartItems() {
-        return {
-            type: Type.cart.clearCartItems
-        }
-    },
-    addToCart(name: string,  number: number, specification: string) {
-        return {
-            type: Type.cart.addToCart,
-            payload: {
-                name, number, specification
-            }
-        }
-    },
-    changeCartItemNumber(name: string, specification: string, number: number) {
-        return {
-            type: Type.cart.changeCartItemNumber,
-            payload: {
-                name, number, specification
-            }
-        }
-    },
-};
-export const modal = {
-    taggleModal(active: boolean, type: "error" | "success" | "" = "", title: string = "", body: string ="") {
-        return {
-            type: Type.modal.taggleModal,
-            payload: {
-                active, type, title, body
-            }
-        }
-    }
-}
-export const order = {
-    taggleFinishFlag(id: string = "") {
-        return {
-            type: Type.order.taggleFinishFlag,
-            payload: id,
-        }
-    },
-    clearOrderForm() {
-        return {
-            type: Type.order.clearOrderForm,
-        }
-    },
-    changePayWay(way: string) {
-        return {
-            type: Type.order.changePayWay,
-            payload: way,
-        };
-    },
-    changeDeliveryWay(way: string) {
-        return {
-            type: Type.order.changeDeliveryWay,
-            payload: way,
-        } 
-    },
-    changeBuyerName(name: string) {
-        return {
-            type: Type.order.changeBuyerName,
-            payload: name
-        };
-    },
-    changeBuyerPhone(phone: string) {
-        return {
-            type: Type.order.changeBuyerPhone,
-            payload: phone
-        };
-    },
-    changeBuyerEmail(email: string) {
-        return {
-            type: Type.order.changeBuyerEmail,
-            payload: email
-        }
-    },
-    changeReciverName(name: string) {
-        return {
-            type: Type.order.changeReciverName,
-            payload: name
-        };
-    },
-    changeReciverPhone(phone: string) {
-        return {
-            type: Type.order.changeReciverPhone,
-            payload: phone
-        };
-    },
-    changeReciverEmail(email: string) {
-        return {
-            type: Type.order.changeReciverEmail,
-            payload: email
-        }
-    },
-
-}
 export const search = {
-    finishFetchOrder: (order: any) => ({
+    finishFetchOrder: (order: Array<any>) => ({
         type: Type.search.finishFetchOrder,
         payload: order,
     })
+};
+export const modal = {
+    taggleModal: (active: boolean, type: "error" | "success" | "" = "", title: string = "", body: string ="") => ({
+        type: Type.modal.taggleModal,
+        payload: { active, type, title, body }
+    })
 }
-
-
+export const cart = {
+    taggleCartDrawer: () => ({
+        type: Type.cart.taggleCartDrawer
+    }),
+    clearCartItems: () => ({
+            type: Type.cart.clearCartItems
+    }),
+    addToCart: (name: string,  number: number, specification: string)  => ({
+        type: Type.cart.addToCart,
+        payload: { name, number, specification }
+    }),
+    changeCartItemNumber: (name: string, specification: string, number: number) => ({
+        type: Type.cart.changeCartItemNumber,
+        payload: { name, number, specification }
+    }),
+};
+export const order = {
+    taggleFinishFlag: (id: string = "") => ({
+        type: Type.order.taggleFinishFlag,
+        payload: id,
+    }),
+    clearOrderForm: () => ({
+        type: Type.order.clearOrderForm,
+    }),
+    changePayWay: (way: string) => ({
+        type: Type.order.changePayWay,
+        payload: way,
+    }),
+    changeDeliveryWay: (way: string) => ({
+        type: Type.order.changeDeliveryWay,
+        payload: way,
+    }),
+    changeBuyerName: (name: string) => ({
+        type: Type.order.changeBuyerName,
+        payload: name
+    }),
+    changeBuyerPhone: (phone: string) => ({
+        type: Type.order.changeBuyerPhone,
+        payload: phone
+    }),
+    changeBuyerEmail: (email: string) => ({
+         type: Type.order.changeBuyerEmail,
+        payload: email
+    }),
+    changeReciverName: (name: string) => ({
+        type: Type.order.changeReciverName,
+        payload: name
+    }),
+    changeReciverPhone: (phone: string) => ({
+        type: Type.order.changeReciverPhone,
+        payload: phone
+    }),
+    changeReciverEmail: (email: string) =>  ({
+        type: Type.order.changeReciverEmail,
+        payload: email
+    }),
+}
 export const request = {
     fetchProducts(category: string ) {
         return async (getState: () => RootState, dispatch: Function) => {
