@@ -1,10 +1,10 @@
 import React, { useEffect } from"react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import { RootState } from "../../app/reducer";
-import * as ActionsCreateor from "../../app/action/createor";
-import { Container, Item } from "../../common/Grid";
-import Input from "../../common/Input";
+import { RootState } from "../../../app/reducer";
+import * as ActionsCreateor from "../../../app/action/createor";
+import { Container, Item } from "../../../common/Grid";
+import Input from "../../../common/Input";
 import { 
     OrderRoot,
     // Style for Cart
@@ -28,9 +28,22 @@ import {
     OrderFormBlockHeader,
     OrderFormBlockBody,
     OrderFormBlockInput,
-} from "../Order/style";
+} from "../style";
+import styled from "@emotion/styled/macro";
 
-export const Order: React.FC = () => {
+export const OrderSearchCard = styled.div`
+    background-color: #FAFAFA;
+    padding: 30px 60px;
+    margin-bottom: 5%;
+`;
+export const OrderSearchCardHeader = styled.h1`
+    color: #292929;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+`;
+
+export const OrderSearch: React.FC = () => {
     const dispatch = useDispatch();
     const location = useLocation<{from: string}>();
     const { id } = useParams<{id: string}>();
@@ -56,6 +69,9 @@ export const Order: React.FC = () => {
     }
     return (
         <OrderRoot>
+            <OrderSearchCard>
+                <OrderSearchCardHeader>{`訂單編號   ${id}`}</OrderSearchCardHeader>
+            </OrderSearchCard>
             <OrderCartRoot>
                 <OrderCartHeader>
                     <Container>
@@ -174,4 +190,4 @@ export const Order: React.FC = () => {
     )
 };
 
-export default Order;
+export default OrderSearch;

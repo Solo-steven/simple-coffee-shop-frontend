@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Order from "./pages/Order";
-import Search from "./pages/Search";
 import "./asset/animation.css";
 
 const App: React.FC = () => {
@@ -38,10 +37,10 @@ const App: React.FC = () => {
                         <Product />
                     </Route>
                     <Route exact path="/order">
-                        <Order/>
+                        <Order.Form />
                     </Route>
-                    <Route exact path="/search/:id">
-                        <Search/>
+                    <Route exact path="/order/:id">
+                        <Order.Search/>
                     </Route>
                 </Switch>
                 <Modal/>
