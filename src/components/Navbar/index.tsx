@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import * as ActionsCreateor from "../../app/action/createor";
 import { MdManageSearch, MdShoppingCart } from "react-icons/md"
 import {
@@ -13,6 +13,7 @@ import Icon from "../../common/Icon";
 
 const Navbar: React.FC = () => {
     const dispatch = useDispatch();
+    const { push } = useHistory();
     return (
         <NavbarRoot>
             <NavbarTextContainer>
@@ -34,7 +35,7 @@ const Navbar: React.FC = () => {
                 <NavbarButton onClick={ ()=> { dispatch(ActionsCreateor.cart.taggleCartDrawer()) } }>
                     <MdShoppingCart/>
                 </NavbarButton>
-                 <NavbarButton>
+                 <NavbarButton onClick={() => { push("/search") }}>
                      <MdManageSearch/>
                  </NavbarButton>
             </NavbarButtonContainer>

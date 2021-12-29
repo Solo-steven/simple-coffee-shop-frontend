@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Order from "./pages/Order";
 import AboutUs from "./pages/Aboout";
+import Search from "./pages/Search";
 import "./asset/animation.css";
 
 const App: React.FC = () => {
@@ -45,6 +46,9 @@ const App: React.FC = () => {
                     </Route>
                     <Route exact path="/about">
                         <AboutUs/>
+                    </Route>
+                    <Route exact path="/search">
+                        <Search/>
                     </Route>
                 </Switch>
                 <Modal/>

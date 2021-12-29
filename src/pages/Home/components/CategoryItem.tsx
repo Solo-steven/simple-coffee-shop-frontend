@@ -13,9 +13,6 @@ const CategoryItemRoot = styled.div`
         display: flex;
         padding: 8px 5px;
     }
-    &:nth-child(2) {
-        margin-top: 20px;
-    }
 `;
 const CategoryItemIcon = styled.div`
     display: flex;

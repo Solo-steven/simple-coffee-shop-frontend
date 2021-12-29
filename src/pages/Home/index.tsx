@@ -6,9 +6,8 @@ import * as ActionsCreateor from "../../app/action/createor";
 import { Container, Item } from "../../common/Grid";
 import { LoadingReact } from "../../components/Skeleton";
 import ProductCard from "./components/ProductCard";
-import SearchBar from "./components/SearchBar";
 import CategoryItem  from "./components/CategoryItem";
-import { HomeRoot, HomeHeader, HomeBody, HomeContent, HomeSidebar } from "./style";
+import { HomeRoot, HomeHeader, HomeBody, HomeContent, HomeSidebar, HomeSidebarText } from "./style";
 
 const Home: React.FC = () => {
     
@@ -47,7 +46,7 @@ const Home: React.FC = () => {
             <HomeHeader></HomeHeader>
             <HomeBody>
                 <HomeSidebar>
-                    <SearchBar/>
+                    <HomeSidebarText>{"分類"}</HomeSidebarText>
                     <CategoryItem
                         to="/home/beans"
                         text="咖啡豆"

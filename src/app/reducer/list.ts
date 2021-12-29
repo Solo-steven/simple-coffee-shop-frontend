@@ -1,6 +1,6 @@
 import * as Type from "../action/type";
 
-export interface SearchState extends Array<{
+export interface ListState extends Array<{
     id: string
     deliverWay: string;
     payWay: string;
@@ -23,7 +23,7 @@ export interface SearchState extends Array<{
     }>
 }>{}
 
-export  function  SearchReducer (state: SearchState = [], action: any) {
+export  function  ListReducer (state: ListState = [], action: any) {
     let newState = [...state];
     switch(action.type) {
         case Type.search.finishFetchOrder:

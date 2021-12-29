@@ -3,14 +3,14 @@ import { ProductReducer, ProductState } from "./products";
 import { CartReducer, CartState } from "./cart";
 import { ModalReducer, ModalState } from "./modal";
 import { OrderReducer, OrderState } from "./order";
-import { SearchReducer, SearchState } from "./list"
+import { ListReducer, ListState } from "./list"
 
 export interface RootState  {
     products: ProductState;
     carts: CartState;
     modal: ModalState;
     order: OrderState;
-    list: SearchState;
+    list: ListState;
 }
 
 export const RootReducer = combineReducers({
@@ -18,7 +18,7 @@ export const RootReducer = combineReducers({
     carts: CartReducer,
     modal: ModalReducer,
     order : OrderReducer,
-    list : SearchReducer,
+    list : ListReducer,
 })
 
 export default RootReducer;
