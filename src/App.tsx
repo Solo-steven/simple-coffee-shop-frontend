@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Order from "./pages/Order";
+import AboutUs from "./pages/Aboout";
 import "./asset/animation.css";
 
 const App: React.FC = () => {
@@ -41,6 +42,9 @@ const App: React.FC = () => {
                     </Route>
                     <Route exact path="/order/:id">
                         <Order.Search/>
+                    </Route>
+                    <Route exact path="/about">
+                        <AboutUs/>
                     </Route>
                 </Switch>
                 <Modal/>

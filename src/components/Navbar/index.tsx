@@ -8,7 +8,7 @@ import {
  NavbarText, NavbarTextContainer,
  NavbarButton, NavbarButtonContainer
 } from "./style";
-import Icon from "./icon";
+import Icon from "../../common/Icon";
 
 
 const Navbar: React.FC = () => {
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
                     </Link>
                 </NavbarText>
                 <NavbarText>
-                    <Link to="/">
+                    <Link to="/about">
                         {"關於"}
                     </Link>
                 </NavbarText>

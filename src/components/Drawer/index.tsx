@@ -59,6 +59,10 @@ const Drawer: React.FC = () => {
                         <DrawerFooter>
                             <PrimaryButton 
                                 onClick={() => { 
+                                    if(carts.items.length === 0 ){
+                                        dispatch(ActionCreators.modal.taggleModal(true, "error", "錯誤", "購物車為空的"))
+                                        return;
+                                    }
                                     if(location.pathname !== "order") {
                                         push("/order") 
                                         dispatch(ActionCreators.cart.taggleCartDrawer())
