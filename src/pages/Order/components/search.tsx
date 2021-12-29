@@ -48,7 +48,7 @@ export const OrderSearch: React.FC = () => {
     const location = useLocation<{from: string}>();
     const { id } = useParams<{id: string}>();
 
-    const orders = useSelector((root: RootState) => root.search.filter(item => item.id ===id));
+    const orders = useSelector((root: RootState) => root.list.filter(item => item.id ===id));
 
     useEffect(() => {
         if(location.state) {

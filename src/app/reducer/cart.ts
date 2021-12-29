@@ -52,12 +52,10 @@ export function CartReducer(state: CartState = initialState, action: any) {
             // search cart item index
             let index = 0;
             for(index =0 ;index < state.items.length ;index++) {
-                            console.log(index);
                if(newState.items[index].name === action.payload.name 
                   && newState.items[index].specification === action.payload.specification
                 ) break;
             }
-                        console.log(index);
             if(index === state.items.length ) break;
             const item = state.items[index];
             newState.items = [ 
