@@ -10,6 +10,7 @@ export const NavbarRoot = styled.div`
     border-bottom: 1px solid #fafafaa9;
     position: fixed;
     top: 0px;
+    z-index: 10;
 `;
 
 export const NavbarSpacer = styled.div`

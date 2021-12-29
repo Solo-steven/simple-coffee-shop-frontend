@@ -5,6 +5,7 @@ import { AppRoot, AppNavbarSpacer, AppBody } from "./style";
 import Navbar from "./components/Navbar";
 import Modal from "./components/Modal";
 import Drawer from "./components/Drawer";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Order from "./pages/Order";
@@ -45,6 +46,7 @@ const App: React.FC = () => {
                 </Switch>
                 <Modal/>
                 <Drawer />
+                <Footer />
             </AppBody>
         </AppRoot>
     );

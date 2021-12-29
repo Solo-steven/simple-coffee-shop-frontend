@@ -4,6 +4,7 @@ export const DrawerRoot =  styled.div`
     width: 100vw;
     height: 100vh;
     position: fixed;
+    z-index: 20;
     top: 0;
     background: #2929299d;
     display: flex;
