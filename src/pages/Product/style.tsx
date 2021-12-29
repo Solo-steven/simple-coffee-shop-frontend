@@ -5,6 +5,37 @@ export const ProductRoot = styled.div`
     max-width: 1280px;
     margin: auto;
     padding: 80px;
+    position: relative;
+`;
+export const ArrowGoBack = styled.div`
+    position: absolute;
+    top: 5%;
+    left: 0px;
+    cursor: pointer;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+       background-color: #232323;
+    }
+    &:active {
+        background-color: #202020; 
+        box-shadow: 0 0 1px 1px #2e2e2e;
+        transition: all .2s
+    }
+    & > svg {
+        color: #FFFFFF;
+        width: 25px;
+        height: 25px;
+    }
+    &:first-child {
+       margin-right: 10px
+   }
 `;
 export const ProductImg = styled.img`
     width: 100%;

@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/reducer";
 import * as ActionsCreateor from "../../app/action/createor"; 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import { MdOutlineArrowBackIos } from "react-icons/md"
 import { Container, Item } from "../../common/Grid";
 import { PrimaryButton, SecondaryButton, InputButton } from "../../common/Button";
 import { Select } from "../../common/Select";
 import { 
     ProductRoot, 
+    ArrowGoBack,
     ProductImg, 
     ProductBody,
     ProductName, 
@@ -20,6 +22,7 @@ import {
 } from "./style";
 
 export const Product: React.FC = () => {
+    const { push, goBack }  = useHistory();
     /**  Temporary Form State Hooks.
      *   -> product number, product specification.
      */
@@ -41,13 +44,15 @@ export const Product: React.FC = () => {
         if(!product){
             dispatch(ActionsCreateor.request.fetchProducts(category));
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [product, dispatch, category]);
 
     if(!product) 
         return <div>Loading</div>
     return (
         <ProductRoot>
+            <ArrowGoBack onClick={()=> { goBack()}}>
+                <MdOutlineArrowBackIos/>
+            </ArrowGoBack>
             <Container spacing={0}>
                 <Item size={7}>
                     <ProductImg src={product.imgUrl}></ProductImg>
@@ -80,7 +85,29 @@ export const Product: React.FC = () => {
                             />
                         </ProductNumber>
                         <ProductButtonGroup>
-                            <PrimaryButton>{"直接購買"}</PrimaryButton>
+                            <PrimaryButton
+                                onClick={()=> {
+                                      if(number !== 0 && specification !== "") {
+                                        if(carts.filter(item => item.name === product.name && item.specification === specification).length > 0) {
+                                            dispatch(ActionsCreateor.modal.taggleModal(
+                                                true, 
+                                                "error", 
+                                                "購物車已存在商品", 
+                                                `${specification}的${product.name}已經在購物車了`
+                                            ))   
+                                            return;                                         
+                                        }
+                                        dispatch(ActionsCreateor.cart.addToCart(product.name, number, specification));
+                                        push("/order");
+                                        setSpecification("");
+                                        setNumber(0);
+                                        return;
+                                    }
+                                    dispatch(ActionsCreateor.modal.taggleModal(true, "error", "錯誤", "數量和規格不可以為空的"))
+                                }}
+                            >
+                                {"直接購買"}
+                            </PrimaryButton>
                             <SecondaryButton 
                                 onClick={ ()=>{ 
                                     if(number !== 0 && specification !== "") {
