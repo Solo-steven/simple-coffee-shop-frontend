@@ -22,12 +22,15 @@ export const NavbarTextContainer = styled.div`
 `;
 
 export const NavbarText = styled.p`
-   font-size: 20px;
-   color: #FAFAFA;
-   cursor: pointer;
-   user-select: none;
    &:first-child {
        margin-right: 10px
+   }
+   & > a {
+        text-decoration: none;
+        font-size: 20px;
+        color: #FAFAFA;
+        cursor: pointer;
+        user-select: none;
    }
 `;
 

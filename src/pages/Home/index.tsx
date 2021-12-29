@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../app/reducer";
 import * as ActionsCreateor from "../../app/action/createor"; 
 import { Container, Item } from "../../common/Grid";
+import { LoadingReact } from "../../components/Skeleton";
 import ProductCard from "./components/ProductCard";
 import SearchBar from "./components/SearchBar";
 import CategoryItem  from "./components/CategoryItem";
@@ -18,9 +19,29 @@ const Home: React.FC = () => {
     const products = useSelector((state: RootState) => state.products.filter((product) => product.category === category));
     const dispatch = useDispatch();
     useEffect(() => {
-        if(products.length === 0) dispatch(ActionsCreateor.request.fetchProducts(category));
+         if(products.length === 0) dispatch(ActionsCreateor.request.fetchProducts(category));
     },[products, category, dispatch]);
-    
+    if(products.length ===0) 
+        return (
+            <HomeRoot>
+                <HomeHeader></HomeHeader>
+                <HomeBody>
+                    <HomeSidebar>
+                        <LoadingReact  style={{marginBottom: "25px"}} width={140} height={40} />
+                        <LoadingReact width={140} height={80} />
+                    </HomeSidebar>
+                    <HomeContent>
+                        <Container spacing={4} alignItems="flex-start">
+                            {
+                                [1,2,3,4,5,6].map(index => (
+                                    <Item size={4}><LoadingReact key={index} width={350}  height={310}/></Item>
+                                ))
+                            }
+                        </Container>
+                    </HomeContent>
+                </HomeBody>
+            </HomeRoot>
+        )
     return ( 
         <HomeRoot>
             <HomeHeader></HomeHeader>

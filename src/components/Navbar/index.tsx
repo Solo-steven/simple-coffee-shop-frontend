@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import * as ActionsCreateor from "../../app/action/createor";
 import { MdManageSearch, MdShoppingCart } from "react-icons/md"
 import {
@@ -15,8 +16,16 @@ const Navbar: React.FC = () => {
     return (
         <NavbarRoot>
             <NavbarTextContainer>
-                <NavbarText>{"商店"}</NavbarText>
-                <NavbarText>{"關於"}</NavbarText>
+                <NavbarText>
+                    <Link to="/">
+                        {"商店"}
+                    </Link>
+                </NavbarText>
+                <NavbarText>
+                    <Link to="/">
+                        {"關於"}
+                    </Link>
+                </NavbarText>
             </NavbarTextContainer>
             <NavbarSpacer/>
             <Icon/>
